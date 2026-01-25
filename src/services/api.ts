@@ -27,6 +27,7 @@ export async function registerUser(
   try {
     const formatResquest = {...formData}
     formatResquest['isBusiness'] = formData.isFormal === "yes" ? true : false;
+    formatResquest['namePlan'] = formData.namePlan || 'STARTER';
     const response = await fetch(`${API_URL}/requests`, {
       method: "POST",
       headers: {

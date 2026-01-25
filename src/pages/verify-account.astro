@@ -170,16 +170,17 @@ const API_URL =
     }
 
     try {
-      const response = await fetch(`${API_URL}/auth/verify?token=${token}`, {
-        method: "GET",
+      const response = await fetch(`${API_URL}/requests/${token}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "status": "verified" }),
       });
 
       const result = await response.json();
 
       if (response.ok) {
         emailEl.textContent = result.email;
-        businessEl.textContent = result.business;
+        businessEl.textContent = result.businessName;
         showState("success");
       } else {
         showState("error");

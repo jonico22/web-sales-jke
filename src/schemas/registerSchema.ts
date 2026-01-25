@@ -32,6 +32,7 @@ export const registerSchema = z.object({
   
   isFormal: z.enum(["yes", "no"]),
   isBusiness: z.boolean().optional(),
+  namePlan: z.string().optional(),
   ruc: z
     .string()
     .regex(/^[0-9]{11}$/, "El RUC debe tener 11 dígitos")
