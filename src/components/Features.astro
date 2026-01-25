@@ -1,0 +1,80 @@
+---
+// src/components/Features.astro
+
+// Datos de las características para iterar limpiamente
+const features = [
+  {
+    icon: "inventory_2",
+    title: "Control de Stock",
+    description:
+      "Monitorea entradas y salidas en tiempo real. Nunca más pierdas una venta por falta de inventario.",
+    color: "bg-cyan-500/10 text-cyan-600",
+  },
+  {
+    icon: "notifications_active",
+    title: "Alertas Inteligentes",
+    description:
+      "Recibe notificaciones automáticas cuando tus productos estén por debajo del stock mínimo.",
+    color: "bg-purple-500/10 text-purple-600",
+  },
+  {
+    icon: "monitoring",
+    title: "Reportes Avanzados",
+    description:
+      "Analiza tendencias de venta y predice la demanda futura con gráficos detallados y exportables.",
+    color: "bg-pink-500/10 text-pink-600",
+  },
+  {
+    icon: "group",
+    title: "Multiusuario",
+    description:
+      "Gestiona permisos granulares para tu equipo. Controla quién puede ver, editar o eliminar datos.",
+    color: "bg-emerald-500/10 text-emerald-600",
+  },
+];
+---
+
+<section
+  id="features"
+  class="w-full bg-white dark:bg-background-dark py-24 px-4 sm:px-10 border-b border-gray-100 dark:border-gray-800 transition-colors duration-200"
+>
+  <div class="max-w-[1280px] w-full mx-auto">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2
+        class="text-slate-900 dark:text-white text-3xl sm:text-4xl font-extrabold leading-tight tracking-tight mb-4"
+      >
+        Todo lo que necesitas para <br />
+        <span class="text-brand-blue">escalar tu negocio</span>
+      </h2>
+      <p
+        class="text-slate-muted dark:text-gray-400 text-lg font-medium leading-relaxed"
+      >
+        Herramientas potentes diseñadas para simplificar la gestión operativa de
+        tu almacén desde el primer día.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      {
+        features.map((feature) => (
+          <div class="group relative p-6 sm:p-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 hover:border-brand-blue/30 dark:hover:border-brand-blue/30 shadow-sm hover:shadow-xl hover:shadow-brand-blue/5 transition-all duration-300 hover:-translate-y-1 cursor-default">
+            <div
+              class={`w-12 h-12 rounded-xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+            >
+              <span class="material-symbols-outlined text-2xl">
+                {feature.icon}
+              </span>
+            </div>
+
+            <h3 class="text-slate-900 dark:text-white text-xl font-bold mb-3 group-hover:text-brand-blue transition-colors">
+              {feature.title}
+            </h3>
+            <p class="text-slate-muted dark:text-slate-400 text-base leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

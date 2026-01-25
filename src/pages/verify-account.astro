@@ -1,0 +1,195 @@
+---
+import MinimalLayout from "../layouts/MinimalLayout.astro";
+
+// Obtenemos el token de la URL
+const token = Astro.url.searchParams.get("token");
+
+// VARIABLE DE ENTORNO: Definida en tu archivo .env como PUBLIC_API_URL
+const API_URL =
+  import.meta.env.PUBLIC_API_URL || "https://api.jkesolutions.com";
+---
+
+<MinimalLayout title="Verificando Cuenta - JKE Solutions">
+  <main class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="mb-8 flex items-center gap-3 group">
+      <div
+        class="size-10 bg-confirm-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-confirm-primary/20 transition-transform group-hover:scale-105"
+      >
+        <span class="material-symbols-outlined text-2xl">inventory_2</span>
+      </div>
+      <div class="flex flex-col">
+        <h2
+          class="text-[#343D46] text-xl font-black leading-none tracking-tight"
+        >
+          JKE
+        </h2>
+        <span
+          class="text-[10px] font-bold text-confirm-primary uppercase tracking-[0.2em]"
+          >Solutions</span
+        >
+      </div>
+    </div>
+
+    <div
+      class="w-full max-w-[480px] bg-white rounded-3xl shadow-2xl shadow-slate-200/60 overflow-hidden border border-slate-100 relative min-h-[400px] flex flex-col"
+    >
+      <div
+        id="top-bar"
+        class="h-2 w-full bg-slate-200 transition-colors duration-500"
+      >
+      </div>
+
+      <div
+        id="state-loading"
+        class="flex-1 flex flex-col items-center justify-center p-8 text-center"
+      >
+        <div
+          class="animate-spin size-12 border-[3px] border-confirm-primary/20 border-t-confirm-primary rounded-full mb-4"
+        >
+        </div>
+        <h3 class="text-lg font-bold text-slate-700">Validando acceso</h3>
+        <p class="text-slate-400 text-sm">
+          Espera un momento mientras verificamos tu enlace...
+        </p>
+      </div>
+
+      <div id="state-success" class="hidden flex-1 flex flex-col p-8 sm:p-10">
+        <div class="flex flex-col items-center text-center mb-8">
+          <div
+            class="size-20 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center mb-6"
+          >
+            <span class="material-symbols-outlined text-[48px]">verified</span>
+          </div>
+          <h1 class="text-[#343D46] text-2xl font-black mb-2">
+            ¡Cuenta Activada!
+          </h1>
+          <p class="text-slate-500 text-sm">
+            Tus datos han sido validados correctamente.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 mb-8">
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-400 text-xs font-bold uppercase"
+                >Usuario</span
+              >
+              <span id="res-email" class="text-[#343D46] text-sm font-bold"
+                >---</span
+              >
+            </div>
+            <div
+              class="flex justify-between items-center pt-3 border-t border-slate-200/50"
+            >
+              <span class="text-slate-400 text-xs font-bold uppercase"
+                >Empresa</span
+              >
+              <span id="res-business" class="text-[#343D46] text-sm font-bold"
+                >---</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <a
+          href="/login"
+          class="w-full bg-confirm-primary hover:bg-confirm-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-confirm-primary/20 transition-all flex items-center justify-center gap-2"
+        >
+          Comenzar ahora
+          <span class="material-symbols-outlined text-xl">rocket_launch</span>
+        </a>
+      </div>
+
+      <div
+        id="state-error"
+        class="hidden flex-1 flex flex-col p-8 sm:p-10 items-center text-center justify-center"
+      >
+        <div
+          class="size-20 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mb-6"
+        >
+          <span class="material-symbols-outlined text-[48px]"
+            >history_toggle_off</span
+          >
+        </div>
+        <h1 class="text-[#343D46] text-2xl font-black mb-2">Enlace caducado</h1>
+        <p id="error-desc" class="text-slate-500 text-sm mb-10">
+          El token de seguridad es inválido o ha expirado por motivos de
+          seguridad.
+        </p>
+
+        <div class="w-full space-y-3">
+          <a
+            href="/register"
+            class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2"
+          >
+            Solicitar nuevo enlace
+          </a>
+          <a
+            href="/"
+            class="text-slate-400 text-sm font-bold hover:text-slate-600 transition-colors py-2 block"
+          >
+            Volver al inicio
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <p
+      class="mt-8 text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]"
+    >
+      Protección de datos JKE Security
+    </p>
+  </main>
+</MinimalLayout>
+
+<script define:vars={{ token, API_URL }}>
+  const states = {
+    loading: document.getElementById("state-loading"),
+    success: document.getElementById("state-success"),
+    error: document.getElementById("state-error"),
+  };
+  const topBar = document.getElementById("top-bar");
+  const emailEl = document.getElementById("res-email");
+  const businessEl = document.getElementById("res-business");
+
+  function showState(stateName) {
+    Object.keys(states).forEach((key) => {
+      states[key].classList.add("hidden");
+    });
+    states[stateName].classList.remove("hidden");
+
+    // Cambiar color de la barra superior según estado
+    if (stateName === "success") topBar.className = "h-2 w-full bg-emerald-500";
+    if (stateName === "error") topBar.className = "h-2 w-full bg-rose-500";
+  }
+
+  async function handleVerification() {
+    if (!token) {
+      showState("error");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/auth/verify?token=${token}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        emailEl.textContent = result.email;
+        businessEl.textContent = result.business;
+        showState("success");
+      } else {
+        showState("error");
+      }
+    } catch (e) {
+      console.error("API Error:", e);
+      showState("error");
+    }
+  }
+
+  // Ejecutar al cargar
+  handleVerification();
+</script>

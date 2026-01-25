@@ -1,0 +1,670 @@
+---
+// src/pages/register.astro
+import AuthLayout from "../layouts/AuthLayout.astro";
+
+// Obtener el plan de la URL (por defecto Starter si no hay nada)
+const plan = Astro.url.searchParams.get("plan") || "Starter";
+---
+
+<AuthLayout title="Crear Cuenta - JKE Solutions">
+  <div class="flex flex-col lg:flex-row min-h-screen w-full overflow-hidden">
+    <div
+      class="hidden lg:flex lg:w-5/12 xl:w-1/3 relative bg-[#0e161a] flex-col justify-between p-12 overflow-hidden"
+    >
+      <div class="absolute inset-0 z-0">
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-[#0e161a] via-[#0e161a]/70 to-[#0e161a]/30 z-10"
+        >
+        </div>
+        <div
+          class="w-full h-full bg-cover bg-center opacity-40 blur-sm scale-110"
+          style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80');"
+        >
+        </div>
+      </div>
+
+      <div class="relative z-20">
+        <div class="flex items-center gap-3 text-white mb-8">
+          <div
+            class="size-8 bg-[#2e9cdc]/20 rounded-lg flex items-center justify-center text-[#2e9cdc] backdrop-blur-sm border border-[#2e9cdc]/30"
+          >
+            <span class="material-symbols-outlined">inventory_2</span>
+          </div>
+          <h2 class="text-xl font-bold tracking-wide">JKE Solutions</h2>
+        </div>
+      </div>
+
+      <div class="relative z-20 mt-auto mb-6">
+        <h1
+          class="text-white text-4xl xl:text-5xl font-bold leading-tight mb-6 tracking-tight"
+        >
+          Simplifica tu gestión de inventarios con tecnología inteligente
+        </h1>
+        <p class="text-gray-300 text-lg font-medium leading-relaxed max-w-md">
+          Optimiza tus procesos y toma el control total de tu negocio desde hoy.
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="flex-1 flex flex-col items-center justify-center p-4 sm:p-8 lg:p-12 overflow-y-auto"
+    >
+      <div class="lg:hidden w-full max-w-lg mb-6 flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#2e9cdc] text-3xl"
+          >inventory_2</span
+        >
+        <span class="text-[#343D46] font-bold text-xl">JKE Solutions</span>
+      </div>
+
+      <div
+        class="w-full max-w-[560px] bg-white rounded-2xl shadow-xl border border-[#e8eff2] p-6 sm:p-10"
+      >
+        <div class="mb-8">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2e9cdc]/10 text-[#2e9cdc] text-xs font-bold uppercase tracking-wider mb-3"
+          >
+            Plan {plan}
+          </div>
+          <h2 class="text-[#343D46] text-3xl font-bold tracking-tight mb-2">
+            Crea tu cuenta gratis
+          </h2>
+          <p class="text-slate-500 text-base">
+            Ingresa tus datos para comenzar tu prueba de 14 días.
+          </p>
+        </div>
+
+        <form id="register-form" class="flex flex-col gap-5" novalidate>
+          <div class="flex flex-col sm:flex-row gap-5">
+            <label class="flex flex-col flex-1">
+              <span class="text-[#343D46] text-sm font-semibold mb-2"
+                >Nombres</span
+              >
+              <div class="relative">
+                <span
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]"
+                  >person</span
+                >
+                <input
+                  id="firstName"
+                  name="firstName"
+                  class="w-full rounded-lg border border-[#d1dee6] bg-gray-50 text-[#343D46] focus:border-[#2e9cdc] focus:ring-[#2e9cdc] pl-11 py-3 text-base font-medium placeholder:text-slate-400 transition-colors outline-none focus:ring-1"
+                  placeholder="Juan"
+                  required
+                  type="text"
+                />
+              </div>
+              <span
+                class="error-message text-red-500 text-xs mt-1 min-h-[1.25rem] block"
+              ></span>
+            </label>
+            <label class="flex flex-col flex-1">
+              <span class="text-[#343D46] text-sm font-semibold mb-2"
+                >Apellidos</span
+              >
+              <div class="relative">
+                <span
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]"
+                  >person</span
+                >
+                <input
+                  id="lastName"
+                  name="lastName"
+                  class="w-full rounded-lg border border-[#d1dee6] bg-gray-50 text-[#343D46] focus:border-[#2e9cdc] focus:ring-[#2e9cdc] pl-11 py-3 text-base font-medium placeholder:text-slate-400 transition-colors outline-none focus:ring-1"
+                  placeholder="Pérez"
+                  required
+                  type="text"
+                />
+              </div>
+              <span
+                class="error-message text-red-500 text-xs mt-1 min-h-[1.25rem] block"
+              ></span>
+            </label>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-5">
+            <label class="flex flex-col flex-1">
+              <span class="text-[#343D46] text-sm font-semibold mb-2"
+                >Email</span
+              >
+              <div class="relative">
+                <span
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]"
+                  >mail</span
+                >
+                <input
+                  id="email"
+                  name="email"
+                  class="w-full rounded-lg border border-[#d1dee6] bg-gray-50 text-[#343D46] focus:border-[#2e9cdc] focus:ring-[#2e9cdc] pl-11 py-3 text-base font-medium placeholder:text-slate-400 transition-colors outline-none focus:ring-1"
+                  placeholder="nombre@empresa.com"
+                  required
+                  type="email"
+                />
+              </div>
+              <span
+                class="error-message text-red-500 text-xs mt-1 min-h-[1.25rem] block"
+              ></span>
+            </label>
+            <label class="flex flex-col flex-1">
+              <span class="text-[#343D46] text-sm font-semibold mb-2"
+                >Teléfono</span
+              >
+              <div class="relative">
+                <span
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]"
+                  >call</span
+                >
+                <input
+                  id="phone"
+                  name="phone"
+                  class="w-full rounded-lg border border-[#d1dee6] bg-gray-50 text-[#343D46] focus:border-[#2e9cdc] focus:ring-[#2e9cdc] pl-11 py-3 text-base font-medium placeholder:text-slate-400 transition-colors outline-none focus:ring-1"
+                  placeholder="+51 999 999 999"
+                  type="tel"
+                />
+              </div>
+              <span
+                class="error-message text-red-500 text-xs mt-1 min-h-[1.25rem] block"
+              ></span>
+            </label>
+          </div>
+
+          <label class="flex flex-col">
+            <span class="text-[#343D46] text-sm font-semibold mb-2"
+              >Nombre del Negocio</span
+            >
+            <div class="relative">
+              <span
+                class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]"
+                >storefront</span
+              >
+              <input
+                id="businessName"
+                name="businessName"
+                class="w-full rounded-lg border border-[#d1dee6] bg-gray-50 text-[#343D46] focus:border-[#2e9cdc] focus:ring-[#2e9cdc] pl-11 py-3 text-base font-medium placeholder:text-slate-400 transition-colors outline-none focus:ring-1"
+                placeholder="Mi Empresa S.A.C."
+                required
+                type="text"
+              />
+            </div>
+            <span
+              class="error-message text-red-500 text-xs mt-1 min-h-[1.25rem] block"
+            ></span>
+          </label>
+
+          <div class="flex flex-col">
+            <label class="flex flex-col">
+              <span class="text-[#343D46] text-sm font-semibold mb-2"
+                >¿Es un negocio formal?</span
+              >
+              <div class="relative">
+                <span
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]"
+                  >verified</span
+                >
+                <select
+                  id="business-type-select"
+                  name="isFormal"
+                  class="w-full rounded-lg border border-[#d1dee6] bg-gray-50 text-[#343D46] focus:border-[#2e9cdc] focus:ring-[#2e9cdc] pl-11 pr-10 py-3 text-base font-medium appearance-none cursor-pointer transition-colors outline-none focus:ring-1"
+                >
+                  <option value="no">No, estoy empezando</option>
+                  <option value="yes" selected>Sí, tengo RUC</option>
+                </select>
+                <span
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none material-symbols-outlined text-[20px]"
+                  >expand_more</span
+                >
+              </div>
+            </label>
+
+            <div
+              id="ruc-field"
+              class="overflow-hidden transition-all duration-300 ease-in-out max-h-[100px] opacity-100 mt-4"
+            >
+              <label class="flex flex-col">
+                <span class="text-[#343D46] text-sm font-semibold mb-2"
+                  >Número de Documento RUC</span
+                >
+                <div class="relative">
+                  <span
+                    class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 material-symbols-outlined text-[20px]"
+                    >badge</span
+                  >
+                  <input
+                    id="ruc"
+                    name="ruc"
+                    class="w-full rounded-lg border border-[#d1dee6] bg-gray-50 text-[#343D46] focus:border-[#2e9cdc] focus:ring-[#2e9cdc] pl-11 py-3 text-base font-medium placeholder:text-slate-400 transition-colors outline-none focus:ring-1"
+                    placeholder="20123456789"
+                    type="text"
+                  />
+                </div>
+                <span
+                  class="error-message text-red-500 text-xs mt-1 min-h-[1.25rem] block"
+                ></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button
+              id="submit-btn"
+              class="group w-full cursor-pointer bg-[#2e9cdc] hover:bg-[#258ecb] active:bg-[#1c7ab0] text-white rounded-lg py-3.5 px-6 font-bold text-base transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              type="submit"
+            >
+              <span id="btn-text">Crear Cuenta Gratis</span>
+              <span
+                id="btn-icon"
+                class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1"
+                >arrow_forward</span
+              >
+              <span id="btn-spinner" class="hidden">
+                <svg
+                  class="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <!-- Alert container for API responses -->
+          <div id="alert-container" class="hidden mt-4"></div>
+
+          <p class="text-center text-sm text-slate-500 mt-2">
+            ¿Ya tienes una cuenta?
+            <a class="text-[#2e9cdc] hover:underline font-bold" href="#"
+              >Inicia sesión</a
+            >
+          </p>
+        </form>
+
+        <div
+          class="mt-8 pt-6 border-t border-gray-100 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-slate-400"
+        >
+          <a class="hover:text-slate-600 transition-colors" href="#"
+            >Términos de Servicio</a
+          >
+          <a class="hover:text-slate-600 transition-colors" href="#"
+            >Política de Privacidad</a
+          >
+          <a class="hover:text-slate-600 transition-colors" href="#">Ayuda</a>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-400 mt-8">
+        © {new Date().getFullYear()} JKE Solutions. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</AuthLayout>
+
+<script>
+  import { z } from "zod";
+
+  // Definir el esquema base (objeto) para acceder a validaciones individuales
+  const baseRegisterSchema = z.object({
+    firstName: z
+      .string()
+      .min(2, "El nombre debe tener al menos 2 caracteres")
+      .max(50, "El nombre no puede exceder 50 caracteres")
+      .regex(
+        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
+        "El nombre solo puede contener letras",
+      ),
+
+    lastName: z
+      .string()
+      .min(2, "El apellido debe tener al menos 2 caracteres")
+      .max(50, "El apellido no puede exceder 50 caracteres")
+      .regex(
+        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/,
+        "El apellido solo puede contener letras",
+      ),
+
+    email: z
+      .string()
+      .min(1, "El email es obligatorio")
+      .email("Ingresa un correo electrónico válido"),
+
+    phone: z
+      .string()
+      .regex(/^\+?[0-9\s\-()]{9,15}$/, "Ingresa un número de teléfono válido")
+      .optional()
+      .or(z.literal("")),
+
+    businessName: z
+      .string()
+      .min(3, "El nombre del negocio debe tener al menos 3 caracteres")
+      .max(100, "El nombre del negocio no puede exceder 100 caracteres"),
+
+    isFormal: z.enum(["yes", "no"]),
+
+    ruc: z
+      .string()
+      .regex(/^[0-9]{11}$/, "El RUC debe tener exactamente 11 dígitos")
+      .optional()
+      .or(z.literal("")),
+  });
+
+  // Definir el esquema completo con refinamientos
+  const registerSchema = baseRegisterSchema.refine(
+    (data) => {
+      // Si es formal, el RUC es obligatorio
+      if (data.isFormal === "yes") {
+        return data.ruc && data.ruc.length === 11;
+      }
+      return true;
+    },
+    {
+      message: "El RUC es obligatorio para negocios formales",
+      path: ["ruc"],
+    },
+  );
+
+  // Elementos del DOM
+  const form = document.getElementById("register-form") as HTMLFormElement;
+  const select = document.getElementById(
+    "business-type-select",
+  ) as HTMLSelectElement;
+  const rucField = document.getElementById("ruc-field") as HTMLDivElement;
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+  const btnText = document.getElementById("btn-text") as HTMLSpanElement;
+  const btnIcon = document.getElementById("btn-icon") as HTMLSpanElement;
+  const btnSpinner = document.getElementById("btn-spinner") as HTMLSpanElement;
+  const alertContainer = document.getElementById(
+    "alert-container",
+  ) as HTMLDivElement;
+
+  // Función para mostrar error en un campo
+  function showError(fieldName: string, message: string) {
+    const input = document.getElementById(fieldName) as HTMLInputElement;
+    const label = input?.closest("label");
+    const errorSpan = label?.querySelector(".error-message") as HTMLSpanElement;
+
+    if (input && errorSpan) {
+      input.classList.add(
+        "border-red-500",
+        "focus:border-red-500",
+        "focus:ring-red-500",
+      );
+      input.classList.remove(
+        "border-[#d1dee6]",
+        "focus:border-[#2e9cdc]",
+        "focus:ring-[#2e9cdc]",
+      );
+      errorSpan.textContent = message;
+    }
+  }
+
+  // Función para limpiar error de un campo
+  function clearError(fieldName: string) {
+    const input = document.getElementById(fieldName) as HTMLInputElement;
+    const label = input?.closest("label");
+    const errorSpan = label?.querySelector(".error-message") as HTMLSpanElement;
+
+    if (input && errorSpan) {
+      input.classList.remove(
+        "border-red-500",
+        "focus:border-red-500",
+        "focus:ring-red-500",
+      );
+      input.classList.add(
+        "border-[#d1dee6]",
+        "focus:border-[#2e9cdc]",
+        "focus:ring-[#2e9cdc]",
+      );
+      errorSpan.textContent = "";
+    }
+  }
+
+  // Función para limpiar todos los errores
+  function clearAllErrors() {
+    const fields = [
+      "firstName",
+      "lastName",
+      "email",
+      "phone",
+      "businessName",
+      "ruc",
+    ];
+    fields.forEach((field) => clearError(field));
+  }
+
+  // Función para mostrar el estado de carga
+  function setLoadingState(isLoading: boolean) {
+    if (submitBtn && btnText && btnIcon && btnSpinner) {
+      submitBtn.disabled = isLoading;
+
+      if (isLoading) {
+        btnText.textContent = "Creando cuenta...";
+        btnIcon.classList.add("hidden");
+        btnSpinner.classList.remove("hidden");
+      } else {
+        btnText.textContent = "Crear Cuenta Gratis";
+        btnIcon.classList.remove("hidden");
+        btnSpinner.classList.add("hidden");
+      }
+    }
+  }
+
+  // Función para mostrar alertas
+  function showAlert(message: string, type: "success" | "error" | "info") {
+    if (!alertContainer) return;
+
+    const bgColor =
+      type === "success"
+        ? "bg-green-50 border-green-200 text-green-800"
+        : type === "error"
+          ? "bg-red-50 border-red-200 text-red-800"
+          : "bg-blue-50 border-blue-200 text-blue-800";
+
+    const icon =
+      type === "success" ? "check_circle" : type === "error" ? "error" : "info";
+
+    alertContainer.innerHTML = `
+      <div class="${bgColor} border rounded-lg p-4 flex items-start gap-3">
+        <span class="material-symbols-outlined text-[20px] mt-0.5">${icon}</span>
+        <p class="text-sm font-medium flex-1">${message}</p>
+        <button onclick="this.parentElement.parentElement.classList.add('hidden')" class="text-current opacity-50 hover:opacity-100">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+    `;
+    alertContainer.classList.remove("hidden");
+
+    // Auto-ocultar después de 5 segundos para mensajes de éxito
+    if (type === "success") {
+      setTimeout(() => {
+        alertContainer.classList.add("hidden");
+      }, 5000);
+    }
+  }
+
+  // Función para validar un campo individual
+  function validateField(fieldName: string, value: any) {
+    try {
+      // Usar baseRegisterSchema en lugar de registerSchema para acceder a .shape
+      const fieldSchema = (baseRegisterSchema as any).shape[fieldName];
+      if (fieldSchema) {
+        fieldSchema.parse(value);
+        clearError(fieldName);
+        return true;
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        showError(fieldName, error.errors[0].message);
+      }
+      return false;
+    }
+    return true;
+  }
+
+  // Lógica para mostrar/ocultar el campo RUC
+  if (select && rucField) {
+    select.addEventListener("change", (e) => {
+      const value = (e.target as HTMLSelectElement).value;
+      if (value === "yes") {
+        rucField.style.maxHeight = "100px";
+        rucField.style.opacity = "1";
+        rucField.style.marginTop = "1rem";
+      } else {
+        rucField.style.maxHeight = "0px";
+        rucField.style.opacity = "0";
+        rucField.style.marginTop = "0";
+        // Limpiar error del RUC cuando se oculta
+        clearError("ruc");
+      }
+    });
+  }
+
+  // Agregar validación en tiempo real a cada campo
+  const fields = [
+    { id: "firstName", event: "blur" },
+    { id: "lastName", event: "blur" },
+    { id: "email", event: "blur" },
+    { id: "phone", event: "blur" },
+    { id: "businessName", event: "blur" },
+    { id: "ruc", event: "blur" },
+  ];
+
+  fields.forEach(({ id, event }) => {
+    const input = document.getElementById(id) as HTMLInputElement;
+    if (input) {
+      input.addEventListener(event, () => {
+        const value = input.value.trim();
+        if (value || input.hasAttribute("required")) {
+          validateField(id, value);
+        }
+      });
+
+      // Limpiar error mientras el usuario escribe
+      input.addEventListener("input", () => {
+        if (input.classList.contains("border-red-500")) {
+          clearError(id);
+        }
+      });
+    }
+  });
+
+  // Validación del formulario al enviar
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearAllErrors();
+      alertContainer?.classList.add("hidden");
+
+      // Recopilar datos del formulario
+      const formData = {
+        firstName: (
+          document.getElementById("firstName") as HTMLInputElement
+        ).value.trim(),
+        lastName: (
+          document.getElementById("lastName") as HTMLInputElement
+        ).value.trim(),
+        email: (
+          document.getElementById("email") as HTMLInputElement
+        ).value.trim(),
+        phone: (
+          document.getElementById("phone") as HTMLInputElement
+        ).value.trim(),
+        businessName: (
+          document.getElementById("businessName") as HTMLInputElement
+        ).value.trim(),
+        isFormal: (
+          document.getElementById("business-type-select") as HTMLSelectElement
+        ).value as "yes" | "no",
+        ruc:
+          (document.getElementById("ruc") as HTMLInputElement)?.value.trim() ||
+          "",
+      };
+
+      try {
+        const validatedData = registerSchema.parse(formData);
+        setLoadingState(true);
+        const { registerUser } = await import("../services/api");
+        const response = await registerUser(validatedData);
+
+        // Ocultar estado de carga
+        setLoadingState(false);
+
+        if (response.success) {
+          showAlert(
+            response.message || "¡Cuenta creada exitosamente! Redirigiendo...",
+            "success",
+          );
+
+          // Log para debugging
+          console.log("✅ Usuario registrado:", response.data);
+          form.reset();
+
+          setTimeout(() => {
+            // Cambiar esta URL según tu flujo de la aplicación
+            const email = (document.getElementById("email") as HTMLInputElement)
+              .value;
+            const business = (
+              document.getElementById("businessName") as HTMLInputElement
+            ).value;
+
+            // Redireccionamos pasando los datos por URL
+            const params = new URLSearchParams({
+              email: email,
+              business: business,
+            });
+            window.location.href = `/confirm-email?${params.toString()}`;
+          }, 2000);
+        } else {
+          // Mostrar error de la API
+          showAlert(
+            response.error ||
+              "Error al crear la cuenta. Por favor, intenta nuevamente.",
+            "error",
+          );
+          console.error("❌ Error de API:", response.error);
+        }
+      } catch (error) {
+        setLoadingState(false);
+
+        if (error instanceof z.ZodError) {
+          // Mostrar todos los errores de validación
+          error.errors.forEach((err) => {
+            const fieldName = err.path[0] as string;
+            showError(fieldName, err.message);
+          });
+
+          // Hacer scroll al primer error
+          const firstError = document.querySelector(
+            ".border-red-500",
+          ) as HTMLElement;
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+            firstError.focus();
+          }
+
+          showAlert(
+            "Por favor, corrige los errores en el formulario.",
+            "error",
+          );
+        } else {
+          // Error inesperado
+          console.error("❌ Error inesperado:", error);
+          showAlert(
+            "Ocurrió un error inesperado. Por favor, intenta nuevamente.",
+            "error",
+          );
+        }
+      }
+    });
+  }
+</script>

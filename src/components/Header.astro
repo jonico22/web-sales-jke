@@ -1,0 +1,125 @@
+---
+// src/components/Header.astro
+const links = [
+  { name: "Producto", href: "#producto" },
+  { name: "Características", href: "#features" },
+  { name: "Cómo Funciona", href: "#how-it-works" },
+  { name: "Precios", href: "#pricing" },
+];
+---
+
+<header
+  class="w-full bg-white/80 dark:bg-background-dark/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 transition-all duration-300"
+>
+  <div class="flex justify-center w-full">
+    <div
+      class="flex max-w-[1280px] w-full items-center justify-between px-4 sm:px-10 py-4"
+    >
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 group">
+          <div
+            class="h-10 px-3 bg-brand-dark text-white rounded flex items-center justify-center font-bold tracking-wider group-hover:bg-brand-blue transition-colors duration-300"
+          >
+            JKE
+          </div>
+          <span
+            class="font-bold text-slate-dark dark:text-white text-lg tracking-tight hidden sm:block"
+            >Inventory</span
+          >
+        </a>
+      </div>
+
+      <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+        <nav class="flex items-center gap-8">
+          {
+            links.map((link) => (
+              <a
+                class="text-slate-600 dark:text-gray-300 text-sm font-semibold hover:text-brand-blue dark:hover:text-brand-blue transition-colors"
+                href={link.href}
+              >
+                {link.name}
+              </a>
+            ))
+          }
+        </nav>
+
+        <button
+          class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-brand-dark text-white hover:bg-slate-700 transition-colors text-sm font-bold shadow-md shadow-brand-dark/10 active:scale-95 duration-200"
+        >
+          <span class="truncate">Portal Cliente</span>
+        </button>
+      </div>
+
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-slate-dark dark:text-white cursor-pointer hover:text-brand-blue transition-colors p-1 rounded-md active:bg-slate-100 dark:active:bg-slate-800"
+      >
+        <span
+          class="material-symbols-outlined text-3xl transition-transform duration-300"
+          id="menu-icon">menu</span
+        >
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden absolute top-[73px] left-0 w-full bg-white dark:bg-background-dark border-b border-gray-100 dark:border-gray-800 shadow-xl flex-col p-6 gap-4 origin-top animate-in fade-in slide-in-from-top-5 duration-200"
+  >
+    <nav class="flex flex-col gap-4">
+      {
+        links.map((link) => (
+          <a
+            class="text-slate-600 dark:text-gray-300 text-base font-semibold hover:text-brand-blue py-2 border-b border-gray-50 dark:border-gray-800"
+            href={link.href}
+          >
+            {link.name}
+          </a>
+        ))
+      }
+    </nav>
+    <button
+      class="w-full mt-2 cursor-pointer items-center justify-center rounded-lg h-12 bg-brand-dark text-white hover:bg-slate-700 transition-colors text-base font-bold shadow-md"
+    >
+      Portal Cliente
+    </button>
+  </div>
+</header>
+
+<script>
+  // Lógica del Menú Hamburguesa
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const icon = document.getElementById("menu-icon");
+  const links = menu?.querySelectorAll("a");
+
+  if (btn && menu && icon) {
+    btn.addEventListener("click", () => {
+      const isHidden = menu.classList.contains("hidden");
+
+      if (isHidden) {
+        // Abrir menú
+        menu.classList.remove("hidden");
+        menu.classList.add("flex");
+        icon.textContent = "close"; // Cambia el icono a X
+        document.body.style.overflow = "hidden"; // Evita el scroll del body
+      } else {
+        // Cerrar menú
+        menu.classList.add("hidden");
+        menu.classList.remove("flex");
+        icon.textContent = "menu"; // Vuelve al icono de hamburguesa
+        document.body.style.overflow = ""; // Restaura el scroll
+      }
+    });
+
+    // Cerrar el menú al hacer clic en un enlace
+    links?.forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+        menu.classList.remove("flex");
+        icon.textContent = "menu";
+        document.body.style.overflow = "";
+      });
+    });
+  }
+</script>

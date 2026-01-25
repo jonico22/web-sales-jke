@@ -1,0 +1,102 @@
+---
+// src/components/FAQ.astro
+
+const faqs = [
+  {
+    question: "¿Cómo funciona la Public Preview?",
+    answer:
+      "La Public Preview te da acceso anticipado y gratuito a todas las funcionalidades del plan Starter. Buscamos feedback real para mejorar la plataforma antes del lanzamiento oficial.",
+  },
+  {
+    question: "¿Necesito tarjeta de crédito para registrarme?",
+    answer:
+      "No. Durante la etapa de Public Preview el acceso es completamente gratuito y no requerimos ningún método de pago para comenzar.",
+  },
+  {
+    question: "¿Puedo exportar mis datos si decido irme?",
+    answer:
+      "Absolutamente. Tus datos son tuyos. Puedes descargar tu inventario completo y listado de clientes en formato CSV o Excel en cualquier momento desde el panel de configuración.",
+  },
+  {
+    question: "¿Qué pasará con mi cuenta cuando termine la Preview?",
+    answer:
+      "Te avisaremos con antelación. Podrás elegir mantenerte en el plan gratuito (con sus límites correspondientes) o actualizar a un plan Pro con un descuento especial por haber sido usuario pionero.",
+  },
+  {
+    question: "¿Ofrecen soporte técnico?",
+    answer:
+      "Sí, todos los usuarios tienen acceso a soporte vía correo electrónico con un tiempo de respuesta menor a 24 horas durante días hábiles.",
+  },
+];
+---
+
+<section
+  id="faq"
+  class="w-full bg-slate-50 dark:bg-slate-900/30 py-24 px-4 sm:px-10 border-b border-gray-100 dark:border-gray-800"
+>
+  <div class="max-w-[800px] w-full mx-auto">
+    <div class="text-center mb-16">
+      <h2
+        class="text-slate-900 dark:text-white text-3xl font-extrabold leading-tight tracking-tight mb-4"
+      >
+        Preguntas Frecuentes
+      </h2>
+      <p
+        class="text-slate-muted dark:text-gray-400 text-lg font-medium leading-relaxed"
+      >
+        Resolvemos tus dudas sobre nuestra plataforma y el programa de acceso
+        anticipado.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      {
+        faqs.map((faq, index) => (
+          <details class="group bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-300 hover:shadow-md hover:border-brand-blue/40 dark:hover:border-brand-blue/40">
+            <summary class="flex items-center justify-between p-6 cursor-pointer text-lg font-bold text-slate-800 dark:text-white select-none transition-colors group-hover:text-brand-blue">
+              {faq.question}
+              <span class="material-symbols-outlined text-slate-400 transition-transform duration-300 group-open:rotate-180 group-open:text-brand-blue">
+                expand_more
+              </span>
+            </summary>
+
+            <div class="px-6 pb-6 text-slate-600 dark:text-slate-300 leading-relaxed text-base animate-in slide-in-from-top-2 fade-in duration-300">
+              {faq.answer}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Lógica para cerrar otros acordeones al abrir uno nuevo
+  // Seleccionamos todos los elementos 'details' dentro de la sección FAQ
+  const detailsElements = document.querySelectorAll("#faq details");
+
+  detailsElements.forEach((targetDetail) => {
+    targetDetail.addEventListener("click", (e) => {
+      // Si el elemento se está abriendo (el click ocurre antes de que el estado cambie)
+      // Nota: 'click' en summary dispara el toggle.
+
+      // Recorremos todos los details
+      detailsElements.forEach((detail) => {
+        // Si no es el que acabamos de clickear y está abierto, lo cerramos
+        if (detail !== targetDetail && detail.hasAttribute("open")) {
+          detail.removeAttribute("open");
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Ocultar el triángulo por defecto de los navegadores */
+  details > summary {
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

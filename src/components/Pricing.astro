@@ -1,0 +1,174 @@
+---
+// src/components/Pricing.astro
+
+const plans = [
+  {
+    name: "Starter",
+    badge: "Acceso Inmediato",
+    price: "Gratis",
+    period: "durante Public Preview",
+    description:
+      "Todo lo necesario para empezar a controlar tu stock hoy mismo.",
+    features: [
+      { text: "Hasta 100 productos", icon: "check" },
+      { text: "Alertas básicas de stock", icon: "notifications" },
+      { text: "1 Usuario administrador", icon: "person" },
+      { text: "Soporte por email", icon: "mail" },
+    ],
+    buttonText: "Crear cuenta ahora",
+    active: true, // Este se convertirá en enlace
+  },
+  {
+    name: "Pro Growth",
+    badge: "Próximamente",
+    price: null,
+    period: "Precio por definir",
+    description: "Automatización avanzada para negocios en expansión.",
+    features: [
+      { text: "Productos ilimitados", icon: "check" },
+      { text: "Reportes de predicción", icon: "trending_up" },
+      { text: "Hasta 5 usuarios", icon: "group" },
+    ],
+    buttonText: "Notificarme",
+    active: false, // Este se mantendrá como botón deshabilitado
+  },
+  {
+    name: "Enterprise",
+    badge: "Próximamente",
+    price: null,
+    period: "Precio por definir",
+    description: "Soluciones a medida para grandes volúmenes.",
+    features: [
+      { text: "Multi-almacén", icon: "domain" },
+      { text: "API Integration", icon: "api" },
+      { text: "SLA Garantizado", icon: "verified_user" },
+    ],
+    buttonText: "Notificarme",
+    active: false,
+  },
+];
+---
+
+<section
+  id="pricing"
+  class="w-full bg-white dark:bg-background-dark py-24 px-4 sm:px-10 border-b border-gray-100 dark:border-gray-800 relative transition-colors duration-200"
+>
+  <div
+    class="absolute inset-0 bg-grid-pattern opacity-50 z-0 pointer-events-none"
+  >
+  </div>
+
+  <div class="max-w-[1100px] w-full mx-auto relative z-10">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2
+        class="text-slate-900 dark:text-white text-3xl sm:text-4xl font-extrabold leading-tight mb-4"
+      >
+        Planes para cada etapa
+      </h2>
+      <p class="text-slate-muted dark:text-gray-400 text-lg font-medium">
+        Únete ahora a la Public Preview y disfruta del plan Starter sin costo.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      {
+        plans.map((plan) => (
+          <div
+            class={`relative flex flex-col p-8 rounded-3xl h-full transition-all duration-300
+                    ${
+                      plan.active
+                        ? "bg-white dark:bg-slate-800 border-2 border-primary shadow-2xl shadow-primary/20 md:-translate-y-2 z-10"
+                        : "bg-slate-50 dark:bg-slate-900/40 border border-dashed border-slate-300 dark:border-slate-700 opacity-80"
+                    }
+                `}
+          >
+            <div class="flex items-center justify-between mb-4">
+              <h3
+                class={`text-xl font-bold ${plan.active ? "text-slate-900 dark:text-white" : "text-slate-500 dark:text-slate-400"}`}
+              >
+                {plan.name}
+              </h3>
+              <span
+                class={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest
+                            ${
+                              plan.active
+                                ? "bg-primary text-brand-dark"
+                                : "bg-slate-200 dark:bg-slate-800 text-slate-500"
+                            }
+                        `}
+              >
+                {plan.badge}
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-1 mb-6 h-[72px] justify-center">
+              {plan.price ? (
+                <>
+                  <span class="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    {plan.price}
+                  </span>
+                  <span class="text-xs font-bold text-primary-dark uppercase tracking-wide">
+                    {plan.period}
+                  </span>
+                </>
+              ) : (
+                <div class="flex flex-col gap-2 mt-2">
+                  <div class="h-10 w-24 bg-slate-200 dark:bg-slate-700 rounded-lg animate-pulse" />
+                  <span class="text-sm font-medium text-slate-400">
+                    {plan.period}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <p
+              class={`text-sm mb-8 min-h-[40px] ${plan.active ? "text-slate-500 dark:text-slate-400" : "text-slate-400 dark:text-slate-500"}`}
+            >
+              {plan.description}
+            </p>
+
+            {plan.active ? (
+              /* Caso Activo: Es un ENLACE <a> a /register */
+              <a
+                href={`/register?plan=${plan.name}`}
+                class="w-full py-3 px-6 rounded-xl font-bold transition-all duration-200 mb-8 flex items-center justify-center gap-2 bg-primary text-brand-dark hover:bg-primary-dark shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 text-center cursor-pointer decoration-0"
+              >
+                {plan.buttonText}
+                <span class="material-symbols-outlined text-sm">
+                  arrow_forward
+                </span>
+              </a>
+            ) : (
+              /* Caso Inactivo: Sigue siendo un BOTÓN deshabilitado */
+              <button
+                class="w-full py-3 px-6 rounded-xl font-bold transition-all duration-200 mb-8 flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-not-allowed"
+                disabled
+              >
+                {plan.buttonText}
+              </button>
+            )}
+
+            <ul class="flex flex-col gap-4 flex-1 pt-6 border-t border-slate-100 dark:border-slate-700/50">
+              {plan.features.map((feature) => (
+                <li
+                  class={`flex items-center gap-3 text-sm font-medium ${plan.active ? "text-slate-700 dark:text-slate-300" : "text-slate-500 dark:text-slate-500"}`}
+                >
+                  <div
+                    class={`flex items-center justify-center rounded-full flex-shrink-0
+                                    ${plan.active ? "text-primary-dark w-5 h-5" : "text-slate-300 dark:text-slate-600 w-5 h-5"}
+                                `}
+                  >
+                    <span class="material-symbols-outlined text-[20px] leading-none">
+                      {feature.icon}
+                    </span>
+                  </div>
+                  <span>{feature.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

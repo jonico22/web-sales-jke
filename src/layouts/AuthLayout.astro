@@ -1,18 +1,18 @@
 ---
+// src/layouts/AuthLayout.astro
 interface Props {
   title: string;
 }
-import "../styles/global.css";
+
 const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html class="light" lang="es">
+<html lang="es" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,18 +26,19 @@ const { title } = Astro.props;
       rel="stylesheet"
     />
   </head>
-  <body
-    class="bg-background-light dark:bg-background-dark font-display text-slate-dark dark:text-white transition-colors duration-200"
-  >
-    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-      <slot />
-    </div>
+  <body class="font-display antialiased m-0 p-0">
+    <slot />
   </body>
 </html>
 
 <style is:global>
-  /* Estilos globales si son necesarios */
-  html {
-    scroll-behavior: smooth;
+  @import "tailwindcss";
+
+  @theme {
+    --font-display: "Manrope", sans-serif;
+    /* Definimos el color primario específico de registro para evitar conflictos */
+    --color-reg-primary: #2e9cdc;
+    --color-reg-bg-light: #f6f7f8;
+    --color-reg-sidebar: #0e161a;
   }
 </style>
