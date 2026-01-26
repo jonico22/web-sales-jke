@@ -3,7 +3,7 @@
 import AuthLayout from "../layouts/AuthLayout.astro";
 
 // Obtener el plan de la URL (por defecto Starter si no hay nada)
-const plan = Astro.url.searchParams.get("plan") || "Starter";
+const plan = Astro.url.searchParams.get("plan") || "STARTER";
 ---
 
 <AuthLayout title="Crear Cuenta - JKE Solutions">
@@ -604,26 +604,23 @@ const plan = Astro.url.searchParams.get("plan") || "Starter";
             response.message || "¡Cuenta creada exitosamente! Redirigiendo...",
             "success",
           );
-
-          // Log para debugging
-          console.log("✅ Usuario registrado:", response.data);
-          form.reset();
-
-          setTimeout(() => {
-            // Cambiar esta URL según tu flujo de la aplicación
             const email = (document.getElementById("email") as HTMLInputElement)
               .value;
             const business = (
               document.getElementById("businessName") as HTMLInputElement
             ).value;
+          // Log para debugging
+          console.log("✅ Usuario registrado:", response.data);
+          form.reset();
 
+          setTimeout(() => {
             // Redireccionamos pasando los datos por URL
             const params = new URLSearchParams({
               email: email,
               business: business,
             });
             window.location.href = `/confirm-email?${params.toString()}`;
-          }, 2000);
+          }, 100);
         } else {
           // Mostrar error de la API
           showAlert(
