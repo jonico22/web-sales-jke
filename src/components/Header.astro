@@ -6,6 +6,8 @@ const links = [
   { name: "Cómo Funciona", href: "#how-it-works" },
   { name: "Precios", href: "#pricing" },
 ];
+const public_url = import.meta.env.PUBLIC_WEBSITE_NAME || "http://localhost:5173";
+const home_link = { name: "Portal Cliente", href: public_url };
 ---
 
 <header
@@ -43,13 +45,13 @@ const links = [
           }
         </nav>
 
-        <button
-          class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-brand-dark text-white hover:bg-slate-700 transition-colors text-sm font-bold shadow-md shadow-brand-dark/10 active:scale-95 duration-200"
+        <a href={home_link.href}
+       class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-brand-dark text-white hover:bg-slate-700 transition-colors text-sm font-bold shadow-md shadow-brand-dark/10 active:scale-95 duration-200"
         >
-          <span class="truncate">Portal Cliente</span>
-        </button>
+      <span class="truncate">{home_link.name}</span></a>
       </div>
 
+      
       <button
         id="mobile-menu-btn"
         class="md:hidden text-slate-dark dark:text-white cursor-pointer hover:text-brand-blue transition-colors p-1 rounded-md active:bg-slate-100 dark:active:bg-slate-800"
@@ -78,11 +80,10 @@ const links = [
         ))
       }
     </nav>
-    <button
-      class="w-full mt-2 cursor-pointer items-center justify-center rounded-lg h-12 bg-brand-dark text-white hover:bg-slate-700 transition-colors text-base font-bold shadow-md"
-    >
-      Portal Cliente
-    </button>
+    <a href={home_link.href}
+       class="w-full mt-2 cursor-pointer items-center justify-center rounded-lg h-12 bg-brand-dark text-white hover:bg-slate-700 transition-colors text-base font-bold shadow-md text-center flex "
+        >
+      <span class="truncate">{home_link.name}</span></a>
   </div>
 </header>
 

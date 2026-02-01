@@ -7,6 +7,8 @@ const token = Astro.url.searchParams.get("token");
 // VARIABLE DE ENTORNO: Definida en tu archivo .env como PUBLIC_API_URL
 const API_URL =
   import.meta.env.PUBLIC_API_URL || "https://api.jkesolutions.com";
+const public_url = import.meta.env.PUBLIC_WEBSITE_NAME || "http://localhost:5173";
+const home_link = { name: "Comenzar ahora", href: public_url };
 ---
 
 <MinimalLayout title="Verificando Cuenta - JKE Solutions">
@@ -92,10 +94,10 @@ const API_URL =
         </div>
 
         <a
-          href="/login"
+          href={home_link.href}
           class="w-full bg-confirm-primary hover:bg-confirm-dark text-white font-bold py-4 rounded-xl shadow-lg shadow-confirm-primary/20 transition-all flex items-center justify-center gap-2"
         >
-          Comenzar ahora
+          {home_link.name}
           <span class="material-symbols-outlined text-xl">rocket_launch</span>
         </a>
       </div>
