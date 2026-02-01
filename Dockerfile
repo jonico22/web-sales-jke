@@ -16,8 +16,10 @@ COPY . .
 # --- AGREGA ESTO AQUÍ ---
 # Declaras que esperas esta variable durante el build
 ARG PUBLIC_API_URL
+ARG PUBLIC_WEBSITE_NAME
 # Se la pasas al entorno del build
 ENV PUBLIC_API_URL=$PUBLIC_API_URL
+ENV PUBLIC_WEBSITE_NAME=$PUBLIC_WEBSITE_NAME
 # ------------------------
 # Construimos el proyecto (genera la carpeta dist/)
 RUN npm run build
