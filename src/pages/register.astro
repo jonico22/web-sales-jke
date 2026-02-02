@@ -341,7 +341,6 @@ const plan = Astro.url.searchParams.get("plan") || "STARTER";
     phone: z
       .string()
       .regex(/^\+?[0-9\s\-()]{9,15}$/, "Ingresa un número de teléfono válido")
-      .optional()
       .or(z.literal("")),
 
     businessName: z
