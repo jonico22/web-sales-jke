@@ -4,6 +4,7 @@ import AuthLayout from "../layouts/AuthLayout.astro";
 
 // Obtener el plan de la URL (por defecto Starter si no hay nada)
 const plan = Astro.url.searchParams.get("plan") || "STARTER";
+const public_url = import.meta.env.PUBLIC_WEBSITE_NAME || "http://localhost:5173";
 ---
 
 <AuthLayout title="Crear Cuenta - JKE Solutions">
@@ -284,7 +285,7 @@ const plan = Astro.url.searchParams.get("plan") || "STARTER";
 
           <p class="text-center text-sm text-slate-500 mt-2">
             ¿Ya tienes una cuenta?
-            <a class="text-[#2e9cdc] hover:underline font-bold" href="#"
+            <a class="text-[#2e9cdc] hover:underline font-bold" href={public_url}
               >Inicia sesión</a
             >
           </p>
