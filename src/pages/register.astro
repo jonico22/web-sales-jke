@@ -3,7 +3,8 @@
 import AuthLayout from "../layouts/AuthLayout.astro";
 
 // Obtener el plan de la URL (por defecto Starter si no hay nada)
-const plan = Astro.url.searchParams.get("plan") || "STARTER";
+// Obtener el plan de la URL (por defecto Starter si no hay nada)
+const plan = "STARTER";
 const public_url = import.meta.env.PUBLIC_WEBSITE_NAME || "http://localhost:5173";
 ---
 
@@ -64,7 +65,7 @@ const public_url = import.meta.env.PUBLIC_WEBSITE_NAME || "http://localhost:5173
           <div
             class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2e9cdc]/10 text-[#2e9cdc] text-xs font-bold uppercase tracking-wider mb-3"
           >
-            Plan {plan}
+            Plan <span id="plan-display">{plan}</span>
           </div>
           <h2 class="text-[#343D46] text-3xl font-bold tracking-tight mb-2">
             Crea tu cuenta gratis
@@ -663,5 +664,14 @@ const public_url = import.meta.env.PUBLIC_WEBSITE_NAME || "http://localhost:5173
         }
       }
     });
+  }
+  // Actualizar el plan desde la URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const planParam = urlParams.get("plan");
+  if (planParam) {
+    const planDisplay = document.getElementById("plan-display");
+    if (planDisplay) {
+      planDisplay.textContent = planParam;
+    }
   }
 </script>
