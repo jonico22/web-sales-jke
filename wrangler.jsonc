@@ -1,6 +1,6 @@
 {
 	"main": "dist/_worker.js/index.js",
-	"name": "sales-jke",
+	"name": "web-sales-jke-test",
   "compatibility_date": "2026-02-14",
   "compatibility_flags": [
     "nodejs_compat",
