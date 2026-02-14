@@ -24,20 +24,17 @@ ENV PUBLIC_WEBSITE_NAME=$PUBLIC_WEBSITE_NAME
 # Construimos el proyecto (genera la carpeta dist/)
 RUN npm run build
 
-# ETAPA 3: Ejecución (Imagen Final)
-FROM base AS runtime
+# ETAPA 3: Ejecución (Nginx - Servidor Estático)
+FROM nginx:alpine AS runtime
 
-# Copiamos las dependencias de producción y la carpeta construida desde la etapa anterior
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
+# Copiamos la carpeta construida desde la etapa anterior al directorio predeterminado de Nginx
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Variables de entorno clave para Docker/Coolify
-ENV HOST=0.0.0.0
-ENV PORT=4321
-ENV NODE_ENV=production
+# Copiamos un archivo de configuración de nginx personalizado
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Exponemos el puerto
-EXPOSE 4321
+# Exponemos el puerto 80 (puerto predeterminado de Nginx)
+EXPOSE 80
 
-# Comando para iniciar el servidor
-CMD ["node", "./dist/server/entry.mjs"]
+# Comando por defecto de Nginx (no es estrictamente necesario declararlo, pero es explícito)
+CMD ["nginx", "-g", "daemon off;"]
