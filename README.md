@@ -35,13 +35,13 @@ docker build -t web-sales-jke .
 
 ### Correr el contenedor
 
-Ejecuta el siguiente comando para iniciar el contenedor en el puerto 8080:
+Ejecuta el siguiente comando para iniciar el contenedor en el puerto 4321:
 
 ```bash
-docker run -d -p 8080:80 --name web-sales-jke-container web-sales-jke
+docker run -d -p 4321:4321 --name web-sales-jke-container web-sales-jke
 ```
 
-Tu aplicación estará disponible en `http://localhost:8080`.
+Tu aplicación estará disponible en `http://localhost:4321`.
 
 ### Estructura de Docker
 

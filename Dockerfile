@@ -33,8 +33,8 @@ COPY --from=build /app/dist /usr/share/nginx/html
 # Copiamos un archivo de configuración de nginx personalizado
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Exponemos el puerto 80 (puerto predeterminado de Nginx)
-EXPOSE 80
+# Exponemos el puerto 4321 (para coincidir con configuración previa/Coolify)
+EXPOSE 4321
 
 # Comando por defecto de Nginx (no es estrictamente necesario declararlo, pero es explícito)
 CMD ["nginx", "-g", "daemon off;"]
