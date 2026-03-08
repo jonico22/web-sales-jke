@@ -2,7 +2,7 @@
 import MinimalLayout from "../layouts/MinimalLayout.astro";
 
 // Obtenemos el token de la URL
-const token = Astro.url.searchParams.get("token");
+// const token = Astro.url.searchParams.get("token");
 
 // VARIABLE DE ENTORNO: Definida en tu archivo .env como PUBLIC_API_URL
 const API_URL =
@@ -144,7 +144,9 @@ const home_link = { name: "Comenzar ahora", href: public_url };
   </main>
 </MinimalLayout>
 
-<script define:vars={{ token, API_URL }}>
+<script define:vars={{ API_URL }}>
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get("token");
   const states = {
     loading: document.getElementById("state-loading"),
     success: document.getElementById("state-success"),

@@ -3,8 +3,9 @@
 import MinimalLayout from "../layouts/MinimalLayout.astro";
 
 // LEEMOS LOS DATOS DE LA URL
-const email = Astro.url.searchParams.get("email") || "usuario@correo.com";
-const business = Astro.url.searchParams.get("business") || "Tu Empresa";
+// LEEMOS LOS DATOS DE LA URL
+const email = "usuario@correo.com";
+const business = "Tu Empresa";
 
 // Preparamos el link de Gmail (opcional, ayuda al usuario)
 const gmailLink = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(email)}`;
@@ -68,7 +69,7 @@ const gmailLink = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent
                 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest"
                 >Email enviado a</span
               >
-              <span class="text-sm font-semibold text-[#343D46] truncate"
+              <span id="email-display" class="text-sm font-semibold text-[#343D46] truncate"
                 >{email}</span
               >
             </div>
@@ -89,7 +90,7 @@ const gmailLink = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent
                 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest"
                 >Negocio</span
               >
-              <span class="text-sm font-semibold text-[#343D46] truncate"
+              <span id="business-display" class="text-sm font-semibold text-[#343D46] truncate"
                 >{business}</span
               >
             </div>
@@ -98,6 +99,7 @@ const gmailLink = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent
 
         <div class="w-full space-y-5">
           <a
+            id="gmail-link"
             href={gmailLink}
             target="_blank"
             class="w-full bg-confirm-primary hover:bg-confirm-dark text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg"
@@ -112,3 +114,24 @@ const gmailLink = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent
     </div>
   </main>
 </MinimalLayout>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const email = urlParams.get("email");
+  const business = urlParams.get("business");
+
+  if (email) {
+    const emailDisplay = document.getElementById("email-display");
+    if (emailDisplay) emailDisplay.textContent = email;
+    
+    const gmailLink = document.getElementById("gmail-link") as HTMLAnchorElement;
+    if (gmailLink) {
+      gmailLink.href = `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(email)}`;
+    }
+  }
+
+  if (business) {
+    const businessDisplay = document.getElementById("business-display");
+    if (businessDisplay) businessDisplay.textContent = business;
+  }
+</script>
